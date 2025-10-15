@@ -1,88 +1,72 @@
-<%--&lt;%&ndash; src/main/webapp/views/warranties/check.jsp &ndash;%&gt;--%>
-<%--<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>--%>
-<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
-<%--&lt;%&ndash; BẠN KHÔNG CẦN DÙNG THƯ VIỆN FMT NỮA &ndash;%&gt;--%>
-<%--&lt;%&ndash; <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> &ndash;%&gt;--%>
-
-<%--<div>--%>
-<%--  <h2>Lịch sử bảo hành của bạn</h2>--%>
-<%--  <p>Dưới đây là danh sách các sản phẩm của bạn đang được áp dụng chính sách bảo hành.</p>--%>
-
-<%--  <c:if test="${not empty warranties}">--%>
-<%--    <table class="custom-table">--%>
-<%--      <thead>--%>
-<%--      <tr>--%>
-<%--        <th>Sản phẩm</th>--%>
-<%--        <th>Ngày bắt đầu</th>--%>
-<%--        <th>Ngày kết thúc</th>--%>
-<%--        <th>Trạng thái</th>--%>
-<%--        <th>Ghi chú</th>--%>
-<%--      </tr>--%>
-<%--      </thead>--%>
-<%--      <tbody>--%>
-<%--      <c:forEach var="w" items="${warranties}">--%>
-<%--        <tr>--%>
-<%--          <td><strong>${w.product.name}</strong></td>--%>
-
-<%--            &lt;%&ndash; SỬA Ở ĐÂY: Hiển thị trực tiếp, không dùng fmt:formatDate &ndash;%&gt;--%>
-<%--          <td>${w.startDate}</td>--%>
-<%--          <td>${w.endDate}</td>--%>
-
-<%--          <td>--%>
-<%--            <span class="badge ${w.status == 'Còn hạn' ? 'badge-success' : 'badge-secondary'}">--%>
-<%--                ${w.status}--%>
-<%--            </span>--%>
-<%--          </td>--%>
-<%--          <td>${w.notes}</td>--%>
-<%--        </tr>--%>
-<%--      </c:forEach>--%>
-<%--      </tbody>--%>
-<%--    </table>--%>
-<%--  </c:if>--%>
-<%--  <c:if test="${empty warranties}">--%>
-<%--    <div class="alert alert-info">--%>
-<%--      Bạn chưa có lịch sử bảo hành nào.--%>
-<%--    </div>--%>
-<%--  </c:if>--%>
-<%--</div>--%>
+<%-- src/main/webapp/views/warranties/check.jsp --%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<div>
-  <h2>Lịch sử bảo hành của bạn</h2>
-  <p>Dưới đây là danh sách các sản phẩm của bạn đang được áp dụng chính sách bảo hành.</p>
+<!-- Gắn stylesheet riêng cho trang Bảo hành -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/warranty.css"/>
+
+<div class="warranty-page">
+  <h1 class="title">Lịch sử bảo hành của bạn</h1>
+  <p class="subtitle">Dưới đây là danh sách các sản phẩm của bạn đang được áp dụng chính sách bảo hành.</p>
 
   <c:if test="${not empty warranties}">
-    <table class="custom-table">
-      <thead>
-      <tr>
-        <th>Sản phẩm</th>
-        <th>Ngày bắt đầu</th>
-        <th>Ngày kết thúc</th>
-        <th>Trạng thái</th>
-        <th>Ghi chú</th>
-      </tr>
-      </thead>
-      <tbody>
-      <c:forEach var="w" items="${warranties}">
+    <div class="warranty-card">
+      <table class="warranty-table">
+        <thead>
         <tr>
-          <td><strong>${w.product.name}</strong></td>
-          <td><fmt:formatDate value="${w.startDateAsDate}" pattern="dd/MM/yyyy"/></td>
-          <td><fmt:formatDate value="${w.endDateAsDate}" pattern="dd/MM/yyyy"/></td>
-          <td>
-            <span class="badge ${w.status == 'Còn hạn' ? 'badge-success' : 'badge-secondary'}">
-                ${w.status}
-            </span>
-          </td>
-          <td>${w.notes}</td>
+          <th>Sản phẩm</th>
+          <th>Ngày bắt đầu</th>
+          <th>Ngày kết thúc</th>
+          <th>Trạng thái</th>
+          <th>Ghi chú</th>
         </tr>
-      </c:forEach>
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+        <c:forEach var="w" items="${warranties}">
+          <tr>
+            <td class="warranty-product" data-label="Sản phẩm">
+                ${w.product.name}
+            </td>
+
+            <td data-label="Ngày bắt đầu">
+              <fmt:formatDate value="${w.startDateAsDate}" pattern="dd/MM/yyyy"/>
+            </td>
+
+            <td data-label="Ngày kết thúc">
+              <fmt:formatDate value="${w.endDateAsDate}" pattern="dd/MM/yyyy"/>
+            </td>
+
+            <td data-label="Trạng thái">
+              <c:choose>
+                <c:when test="${w.status eq 'Còn hạn'}">
+                  <span class="status status-active"><i></i>${w.status}</span>
+                </c:when>
+                <c:when test="${w.status eq 'Sắp hết hạn'}">
+                  <span class="status status-soon"><i></i>${w.status}</span>
+                </c:when>
+                <c:when test="${w.status eq 'Hết hạn'}">
+                  <span class="status status-expired"><i></i>${w.status}</span>
+                </c:when>
+                <c:otherwise>
+                  <span class="status"><i></i>${w.status}</span>
+                </c:otherwise>
+              </c:choose>
+            </td>
+
+            <td class="note" data-label="Ghi chú">
+                ${w.notes}
+            </td>
+          </tr>
+        </c:forEach>
+        </tbody>
+      </table>
+    </div>
   </c:if>
+
   <c:if test="${empty warranties}">
-    <div class="alert alert-info">
+    <div class="warranty-card" style="padding:18px;">
       Bạn chưa có lịch sử bảo hành nào.
     </div>
   </c:if>

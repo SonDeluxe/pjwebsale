@@ -14,30 +14,23 @@ public class LineItemDAO {
     // 🧩 PHẦN TIỆN ÍCH CHUNG
     // ==========================================================
     private <T> T executeWithEntityManager(Function<EntityManager, T> operation) {
-        EntityManager em = null;
-        try {
-            em = ConnectionPool.getEntityManagerFactory().createEntityManager();
+        try (EntityManager em = ConnectionPool.getEntityManagerFactory().createEntityManager()) {
             return operation.apply(em);
-        } finally {
-            if (em != null) em.close();
         }
     }
 
     private void executeTransaction(Consumer<EntityManager> operation) {
-        EntityManager em = null;
         EntityTransaction tx = null;
-        try {
-            em = ConnectionPool.getEntityManagerFactory().createEntityManager();
+        try (EntityManager em = ConnectionPool.getEntityManagerFactory().createEntityManager()) {
             tx = em.getTransaction();
             tx.begin();
             operation.accept(em);
             tx.commit();
         } catch (Exception e) {
             if (tx != null && tx.isActive()) tx.rollback();
+            //noinspection CallToPrintStackTrace
             e.printStackTrace();
             throw new RuntimeException("❌ Lỗi khi thực hiện transaction trong LineItemDAO", e);
-        } finally {
-            if (em != null) em.close();
         }
     }
 

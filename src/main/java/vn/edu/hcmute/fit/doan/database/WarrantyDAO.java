@@ -151,11 +151,18 @@ public class WarrantyDAO {
         return executeWithEntityManager(em -> em.find(Warranty.class, id));
     }
 
-    public List<Warranty> findByUserId(int userId) {
-        return executeWithEntityManager(em ->
-                em.createQuery("SELECT w FROM Warranty w JOIN FETCH w.product WHERE w.user.id = :userId ORDER BY w.endDate DESC", Warranty.class)
-                        .setParameter("userId", userId)
-                        .getResultList()
-        );
+    // Trong file WarrantyDAO.java
+
+    public List<Warranty> findByUserId(long userId) { // <-- Nên dùng long cho userId
+        return executeWithEntityManager(em -> {
+            List<Warranty> warranties = em.createQuery(
+                            "SELECT w FROM Warranty w JOIN FETCH w.user JOIN FETCH w.product WHERE w.user.id = :userId ORDER BY w.endDate DESC",
+                            Warranty.class
+                    )
+                    .setParameter("userId", userId)
+                    .getResultList();
+            System.out.println("✅ WarrantyDAO: Tìm thấy " + warranties.size() + " phiếu bảo hành cho user ID: " + userId);
+            return warranties;
+        });
     }
 }

@@ -80,10 +80,9 @@ public class UserDAO {
         );
     }
 
-//    public void updateUser(User user) {
-//        executeTransaction(em -> em.merge(user));
-//        System.out.println("Đã cập nhật người dùng: " + user.getName());
-//    }
+
+
+
     public void updateUser(User user) {
         executeTransaction(em -> {
             User managed = em.find(User.class, user.getId());
@@ -96,11 +95,17 @@ public class UserDAO {
                     managed.setPassword(user.getPassword());
                 }
 
-                em.flush(); // ✅ bắt Hibernate ghi xuống DB ngay lập tức
+                // ✅ Cập nhật vai trò nếu có thay đổi
+                if (user.getRole() != null && !user.getRole().isEmpty()) {
+                    managed.setRole(user.getRole());
+                }
+
+                em.flush(); // Ghi xuống DB ngay
             }
         });
         System.out.println("✅ Đã cập nhật người dùng ID: " + user.getId());
     }
+
 
 
 

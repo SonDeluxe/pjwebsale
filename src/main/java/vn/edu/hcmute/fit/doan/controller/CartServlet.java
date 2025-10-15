@@ -32,9 +32,9 @@ public class CartServlet extends HttpServlet {
         String action = request.getParameter("action");
         if (action == null || action.equals("view")) {
             showCart(request, response);
-        } else if ("addFromWishlist".equals(action)) { // Thêm hành động mới
-            handleAddFromWishlist(request, response);
-        } else {
+        }// else if ("addFromWishlist".equals(action)) { // Thêm hành động mới
+          //  handleAddFromWishlist(request, response); }
+        else {
             response.sendRedirect(request.getContextPath() + "/carts?action=view");
         }
     }
@@ -258,47 +258,47 @@ public class CartServlet extends HttpServlet {
     // ========================
     // 🛒 Thêm từ Wishlist
     // ========================
-    private void handleAddFromWishlist(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        if (session == null || !(session.getAttribute("user") instanceof Customer)) {
-            response.sendRedirect(request.getContextPath() + "/auth?action=login");
-            return;
-        }
-
-        Customer customer = (Customer) session.getAttribute("user");
-        String productIdStr = request.getParameter("productId");
-
-        if (productIdStr == null) {
-            response.sendRedirect(request.getContextPath() + "/wishlist/");
-            return;
-        }
-
-        try {
-            int productId = Integer.parseInt(productIdStr);
-            Product product = productDAO.findProductById(productId);
-
-            if (product != null && product.isStockAvailable(1)) {
-                Cart cart = cartDAO.findCartByCustomerId(customer.getId());
-                if (cart == null) {
-                    cart = new Cart(customer);
-                    cartDAO.addCart(cart);
-                    cart = cartDAO.findCartByCustomerId(customer.getId());
-                }
-
-                LineItem item = new LineItem(product, 1, product.getPrice(), 0);
-                item.setCart(cart);
-                lineItemDAO.addLineItem(item);
-
-                session.setAttribute("success", "Đã thêm sản phẩm từ wishlist vào giỏ hàng!");
-            } else {
-                session.setAttribute("error", "Sản phẩm không có sẵn hoặc không tìm thấy!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.setAttribute("error", "Lỗi khi thêm từ wishlist: " + e.getMessage());
-        }
-
-        response.sendRedirect(request.getContextPath() + "/carts?action=view");
-    }
+//    private void handleAddFromWishlist(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        HttpSession session = request.getSession(false);
+//        if (session == null || !(session.getAttribute("user") instanceof Customer)) {
+//            response.sendRedirect(request.getContextPath() + "/auth?action=login");
+//            return;
+//        }
+//
+//        Customer customer = (Customer) session.getAttribute("user");
+//        String productIdStr = request.getParameter("productId");
+//
+//        if (productIdStr == null) {
+//            response.sendRedirect(request.getContextPath() + "/wishlist/");
+//            return;
+//        }
+//
+//        try {
+//            int productId = Integer.parseInt(productIdStr);
+//            Product product = productDAO.findProductById(productId);
+//
+//            if (product != null && product.isStockAvailable(1)) {
+//                Cart cart = cartDAO.findCartByCustomerId(customer.getId());
+//                if (cart == null) {
+//                    cart = new Cart(customer);
+//                    cartDAO.addCart(cart);
+//                    cart = cartDAO.findCartByCustomerId(customer.getId());
+//                }
+//
+//                LineItem item = new LineItem(product, 1, product.getPrice(), 0);
+//                item.setCart(cart);
+//                lineItemDAO.addLineItem(item);
+//
+//                session.setAttribute("success", "Đã thêm sản phẩm từ wishlist vào giỏ hàng!");
+//            } else {
+//                session.setAttribute("error", "Sản phẩm không có sẵn hoặc không tìm thấy!");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            session.setAttribute("error", "Lỗi khi thêm từ wishlist: " + e.getMessage());
+//        }
+//
+//        response.sendRedirect(request.getContextPath() + "/carts?action=view");
+//    }
 }

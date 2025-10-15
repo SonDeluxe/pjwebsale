@@ -18,7 +18,7 @@ import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@WebServlet("/forgot-password   ")
+@WebServlet("/forgot-password")
 public class PasswordResetServlet extends HttpServlet {
     private final UserDAO userDAO = new UserDAO();
     private final PasswordResetTokenDAO tokenDAO = new PasswordResetTokenDAO();
@@ -77,14 +77,22 @@ public class PasswordResetServlet extends HttpServlet {
             response.sendRedirect(requestUrl);
         } else if (users.size() == 1) {
             User user = users.get(0);
-            boolean isSent = sendOtpForUser(user);
-
-            if (isSent) {
-                session.setAttribute("message", "Mã OTP đã được gửi đến email của bạn.");
-                response.sendRedirect(request.getContextPath() + "/forgot-password?action=verify&userId=" + user.getId());
-            } else {
-                session.setAttribute("error", "Không thể gửi email. Vui lòng chạy quy trình cấp quyền bằng cách truy cập /authorize-gmail.");
-                response.sendRedirect(requestUrl);
+            try {
+                boolean isSent = sendOtpForUser(user);
+                if (isSent) {
+                    session.setAttribute("message", "Mã OTP đã được gửi đến email của bạn.");
+                    response.sendRedirect(request.getContextPath() + "/forgot-password?action=verify&userId=" + user.getId());
+                } else {
+                    session.setAttribute("error", "Không thể gửi email. Vui lòng thử lại sau.");
+                    response.sendRedirect(requestUrl);
+                }
+            } catch (RuntimeException e) {
+                if (e.getMessage().contains("Gmail chưa được cấp quyền")) {
+                    response.sendRedirect(request.getContextPath() + "/authorize-gmail");
+                } else {
+                    session.setAttribute("error", "Lỗi khi gửi email.");
+                    response.sendRedirect(requestUrl);
+                }
             }
         } else {
             request.setAttribute("users", users);
@@ -96,14 +104,23 @@ public class PasswordResetServlet extends HttpServlet {
         int userId = Integer.parseInt(request.getParameter("userId"));
         User user = userDAO.findUserById(userId);
 
-        if(user != null) {
-            boolean isSent = sendOtpForUser(user);
-            if (isSent) {
-                session.setAttribute("message", "Mã OTP đã được gửi đến email của bạn.");
-                response.sendRedirect(request.getContextPath() + "/forgot-password?action=verify&userId=" + user.getId());
-            } else {
-                session.setAttribute("error", "Không thể gửi email. Vui lòng chạy quy trình cấp quyền bằng cách truy cập /authorize-gmail.");
-                response.sendRedirect(request.getContextPath() + "/forgot-password?action=request");
+        if (user != null) {
+            try {
+                boolean isSent = sendOtpForUser(user);
+                if (isSent) {
+                    session.setAttribute("message", "Mã OTP đã được gửi đến email của bạn.");
+                    response.sendRedirect(request.getContextPath() + "/forgot-password?action=verify&userId=" + user.getId());
+                } else {
+                    session.setAttribute("error", "Không thể gửi email. Vui lòng thử lại sau.");
+                    response.sendRedirect(request.getContextPath() + "/forgot-password?action=request");
+                }
+            } catch (RuntimeException e) {
+                if (e.getMessage().contains("Gmail chưa được cấp quyền")) {
+                    response.sendRedirect(request.getContextPath() + "/authorize-gmail");
+                } else {
+                    session.setAttribute("error", "Lỗi khi gửi email.");
+                    response.sendRedirect(request.getContextPath() + "/forgot-password?action=request");
+                }
             }
         } else {
             session.setAttribute("error", "Tài khoản không hợp lệ.");
@@ -164,6 +181,10 @@ public class PasswordResetServlet extends HttpServlet {
             EmailService.sendOtpEmail(user.getEmail(), otp);
             return true;
         } catch (Exception e) {
+            if (e.getMessage() != null && e.getMessage().contains("Gmail chưa được cấp quyền")) {
+                throw new RuntimeException("Gmail chưa được cấp quyền", e);
+            }
+            e.printStackTrace();
             return false;
         }
     }

@@ -1,0 +1,246 @@
+/* view_order.css - Simple Styles */
+
+.order-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+.page-title {
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Information box */
+.order-info-section {
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-info-section h4 {
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 8px;
+}
+
+.list-group {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.list-group-item {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #fff;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.list-group-item strong {
+    color: #333;
+}
+
+/* Badge - Cập nhật thêm màu vàng cho "Chờ xử lý" */
+.badge {
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 4px;
+}
+
+.status-paid {
+    background-color: #28a745 !important; /* Xanh - Đã thanh toán */
+    color: white;
+}
+
+.status-pending {
+    background-color: #ffc107 !important; /* Vàng - Chờ xử lý */
+    color: #212529;
+}
+
+.status-unpaid {
+    background-color: #dc3545 !important; /* Đỏ - Chưa thanh toán */
+    color: white;
+}
+
+.status-cancelled {
+    background-color: #6c757d !important; /* Xám - Đã hủy */
+    color: white;
+}
+
+/* Product table */
+.product-table {
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 0;
+    border-collapse: collapse;
+}
+
+.table thead {
+    background-color: #f8f9fa;
+}
+
+.table th {
+    padding: 15px 12px;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #000;
+    text-align: center;
+}
+
+.table td {
+    padding: 12px;
+    vertical-align: middle;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.table tfoot td {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    border-top: 2px solid #000;
+    color: #333;
+}
+
+/* Product image */
+.img-fluid {
+    max-width: 80px;
+    height: auto;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-back {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-back:hover {
+    background-color: #c82333;
+    color: white;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    color: white;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    color: #212529;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    color: white;
+}
+
+/* Text alignment */
+.text-center {
+    text-align: center;
+}
+
+.text-end {
+    text-align: right;
+}
+
+.text-start {
+    text-align: left;
+}
+
+/* Delivery address */
+.delivery-address {
+    font-weight: bold;
+    color: #333;
+    margin-top: 8px;
+}
+
+/* Total amount */
+.total-amount {
+    font-size: 18px;
+    font-weight: bold;
+    color: #dc3545;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .order-detail-container {
+        padding: 15px;
+    }
+
+    .page-title {
+        font-size: 20px;
+    }
+
+    .table {
+        font-size: 14px;
+    }
+
+    .table th,
+    .table td {
+        padding: 8px 6px;
+    }
+
+    .img-fluid {
+        max-width: 60px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .list-group-item {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+}

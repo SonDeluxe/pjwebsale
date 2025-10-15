@@ -49,19 +49,25 @@
 
         <h2 class="page-title">Bạn muốn mua xe?</h2>
         <section class="category-grid">
-            <div class="category-item" onclick="window.location.href='${pageContext.request.contextPath}/products?action=list'">
-                <img src="${pageContext.request.contextPath}/assets/images/civic.jpg" alt="Ô tô">
-                <div class="category-item-content">
-                    <div class="label">Ô tô</div>
-                </div>
+
+            <!-- Ô tô -->
+            <div class="category-item" onclick="window.location.href='${pageContext.request.contextPath}/products?action=list&type=car'">
+                <video autoplay muted loop playsinline>
+                    <source src="${pageContext.request.contextPath}/assets/videos/civic.mp4" type="video/mp4">
+                </video>
+                <div class="label">Ô tô</div>
             </div>
-            <div class="category-item" onclick="window.location.href='${pageContext.request.contextPath}/products?action=list'">
-                <img src="${pageContext.request.contextPath}/assets/images/CB650R.jpg" alt="Xe máy">
-                <div class="category-item-content">
-                    <div class="label">Xe máy</div>
-                </div>
+
+            <!-- Xe máy -->
+            <div class="category-item" onclick="window.location.href='${pageContext.request.contextPath}/products?action=list&type=bike'">
+                <video autoplay muted loop playsinline>
+                    <source src="${pageContext.request.contextPath}/assets/videos/CB650R.mp4" type="video/mp4">
+                </video>
+                <div class="label">Xe máy</div>
             </div>
+
         </section>
+
     </div>
 </main>
 

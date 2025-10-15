@@ -1,0 +1,296 @@
+/* ===== Payments History – clean Honda look ===== */
+:root{
+    --brand-red: #e60012;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --soft: #f8fafc;
+    --hover: #f3f4f6;
+}
+
+.product-page{
+    padding: 16px 0 40px;
+}
+
+.product-page .page-title{
+    max-width: 1200px;
+    margin: 0 auto 10px;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: .2px;
+}
+
+/* Table base */
+.product-page table{
+    width: min(1100px, 92%) !important;     /* ghi đè inline width */
+    margin: 18px auto !important;           /* ghi đè inline margin */
+    border: 1px solid var(--line) !important;/* ghi đè border="1" */
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(0,0,0,.06);
+    border-radius: 12px;
+    overflow: hidden;                        /* clip góc bo khi table thành block */
+    display: block;                          /* cho phép cuộn ngang trên mobile */
+    overflow-x: auto;
+}
+
+/* Header */
+.product-page thead th{
+    background: var(--soft);
+    color: var(--ink);
+    font-weight: 700;
+    text-align: left;
+    padding: 14px 16px;
+    font-size: .95rem;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+
+/* Cells */
+.product-page tbody td{
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    white-space: nowrap;
+}
+
+/* Zebra & hover */
+.product-page tbody tr:nth-child(odd){ background: #fff; }
+.product-page tbody tr:nth-child(even){ background: #fcfcfc; }
+.product-page tbody tr:hover{ background: var(--hover); }
+
+/* Align/cách điệu theo cột */
+.product-page tbody td:nth-child(1),
+.product-page tbody td:nth-child(2){
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.product-page tbody td:nth-child(3){
+    color: var(--muted);
+}
+
+.product-page tbody td:nth-child(4){          /* Số tiền */
+    text-align: right;
+    font-weight: 800;
+    color: var(--brand-red);
+}
+
+.product-page tbody td:nth-child(5){          /* Phương thức */
+    color: var(--ink);
+}
+
+.product-page tbody td:nth-child(6){          /* Trạng thái */
+    text-align: center;
+    font-weight: 700;
+    color: #0f5132;
+    background: rgba(16,185,129,.1);
+    border-left: 1px solid var(--line);
+}
+
+/* Nếu có trạng thái “Thất bại/Hoàn tiền”, có thể đổi màu nhanh bằng chứa từ khóa */
+.product-page tbody td:nth-child(6):has(> .fail){
+    color: #842029;
+    background: rgba(220,53,69,.08);
+}
+
+/* Empty state (khi bạn không dùng table) */
+.product-page p[style*="text-align: center"]{
+    max-width: 1100px;
+    margin: 24px auto;
+    padding: 18px 20px;
+    background: var(--soft);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    color: var(--muted);
+    box-shadow: 0 6px 16px rgba(0,0,0,.04);
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px){
+    .product-page .page-title{ font-size: 1.5rem; }
+    .product-page table{ width: 94% !important; }
+    .product-page thead th,
+    .product-page tbody td{ padding: 12px 14px; }
+}
+/* ===== Payments History — refined card table ===== */
+:root{
+    --brand-red:#e60012;
+    --ink:#111827;
+    --muted:#6b7280;
+    --line:#e5e7eb;
+    --soft:#f8fafc;
+    --hover:#f3f4f6;
+}
+
+.product-page{
+    padding: 18px 0 64px;
+}
+
+/* Tiêu đề trang: gọn và căn theo lề content */
+.product-page .page-title{
+    max-width: 1200px;
+    margin: 0 auto 14px;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: .2px;
+}
+
+/* ===== Table card ===== */
+.product-page table{
+    width: min(1200px, 96%) !important;      /* ghi đè inline width */
+    margin: 12px auto !important;            /* ghi đè inline margin */
+    background: #fff;
+    border: none !important;                 /* ghi đè border="1" */
+    border-collapse: collapse !important;
+    table-layout: fixed;                     /* cột ổn định */
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.06);
+    overflow: hidden;                        /* bo góc */
+    text-align: left !important;             /* ghi đè text-align center inline */
+}
+
+/* Header */
+.product-page thead th{
+    background: var(--soft);
+    color: var(--ink);
+    font-weight: 700;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+}
+
+/* Body cells: chỉ kẻ ngang */
+.product-page tbody td{
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    white-space: nowrap;                     /* không bị xuống dòng linh tinh */
+}
+
+/* Zebra + hover */
+.product-page tbody tr:nth-child(odd){ background: #fff; }
+.product-page tbody tr:nth-child(even){ background: #fcfcfc; }
+.product-page tbody tr:hover{ background: var(--hover); }
+
+/* Định cỡ & căn theo cột */
+.product-page thead th:nth-child(1),
+.product-page thead th:nth-child(2){ width: 88px; }
+
+.product-page thead th:nth-child(3){ width: 190px; }     /* ngày */
+.product-page thead th:nth-child(4){ width: 190px; }     /* tiền */
+.product-page thead th:nth-child(6){ width: 160px; }     /* trạng thái */
+
+.product-page tbody td:nth-child(1),
+.product-page tbody td:nth-child(2){
+    font-weight: 700;
+    color: var(--ink);
+    text-align: center;                      /* #mã gọn gàng */
+}
+
+.product-page tbody td:nth-child(3){
+    color: var(--muted);
+}
+
+.product-page tbody td:nth-child(4){       /* Số tiền */
+    text-align: right;
+    font-weight: 800;
+    color: var(--brand-red);
+}
+
+.product-page tbody td:nth-child(5){
+    white-space: normal;                     /* cho phép xuống dòng nếu cần */
+}
+
+/* Trạng thái: badge nhẹ nhàng */
+.product-page tbody td:nth-child(6){
+    text-align: center;
+    font-weight: 700;
+    color: #0f5132;
+    background: rgba(16,185,129,.10);
+    border-left: 1px solid var(--line);
+}
+
+/* Empty-state (khi không có dữ liệu) – thay cho <p style="..."> mặc định */
+.product-page p[style*="text-align: center"]{
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 18px 20px;
+    background: var(--soft);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    color: var(--muted);
+    box-shadow: 0 6px 16px rgba(0,0,0,.04);
+}
+
+/* Responsive */
+@media (max-width: 768px){
+    .product-page .page-title{ font-size: 22px; }
+    .product-page table{ width: 96% !important; }
+    .product-page thead th,
+    .product-page tbody td{ padding: 12px 12px; }
+}
+/* === FIX: loại bỏ cột trắng bên phải bảng thanh toán === */
+.product-page table{
+    width: min(1200px, 96%) !important;  /* vẫn giữ card width */
+    table-layout: auto !important;       /* bỏ fixed layout gây khoảng trống */
+    border-collapse: collapse !important;
+}
+
+.product-page thead th,
+.product-page tbody td{
+    width: auto !important;              /* bỏ width cứng trên từng cột */
+}
+
+/* Nếu trước đó có rule set width theo nth-child, vô hiệu hoá */
+.product-page thead th:nth-child(1),
+.product-page thead th:nth-child(2),
+.product-page thead th:nth-child(3),
+.product-page thead th:nth-child(4),
+.product-page thead th:nth-child(6){
+    width: auto !important;
+}
+
+/* Tuỳ chọn: tránh tràn chữ dài của cột “Phương thức” trên màn nhỏ */
+@media (max-width: 768px){
+    .product-page tbody td:nth-child(5){
+        white-space: normal !important;
+    }
+}
+/* === Hard fix: bỏ hẳn dư bên phải, table co đúng theo nội dung === */
+.product-page{
+    text-align: center;                 /* để dễ căn giữa table khi inline-table */
+}
+
+.product-page table{
+    display: inline-table;              /* co theo nội dung, không kéo full khung */
+    border-collapse: separate !important;
+    border-spacing: 0;
+    width: auto !important;             /* bỏ width cứng trước đó */
+    max-width: 1200px;                  /* vẫn giới hạn nếu nội dung dài */
+    margin: 12px auto !important;
+    table-layout: auto !important;      /* bỏ fixed layout */
+}
+
+.product-page thead th,
+.product-page tbody td{
+    width: auto !important;             /* xóa width cột đã set ở rule cũ */
+}
+
+/* Nếu trước đó có các rule set width theo nth-child, vô hiệu hóa luôn */
+.product-page thead th:nth-child(1),
+.product-page thead th:nth-child(2),
+.product-page thead th:nth-child(3),
+.product-page thead th:nth-child(4),
+.product-page thead th:nth-child(5),
+.product-page thead th:nth-child(6){
+    width: auto !important;
+}
+
+/* Giữ lại căn phải cho cột tiền */
+.product-page tbody td:nth-child(4){
+    text-align: right !important;
+}

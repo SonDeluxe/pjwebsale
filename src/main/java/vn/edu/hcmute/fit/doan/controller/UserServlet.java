@@ -162,38 +162,19 @@ private void updateUser(HttpServletRequest request, HttpServletResponse response
 
     // Vai trò mới (nếu có)
     String newRole = request.getParameter("role");
-
     if (newRole != null && !newRole.isEmpty()) {
-        // ✅ Nếu là Customer và được nâng cấp lên Admin
         if ("Customer".equalsIgnoreCase(user.getRole()) && "Admin".equalsIgnoreCase(newRole)) {
-            Admin newAdmin = new Admin();
-            newAdmin.setUsername(user.getName());
-            newAdmin.setPassword(user.getPassword());
-            newAdmin.setEmail(user.getEmail());
-            newAdmin.setAddress(user.getAddress());
-            newAdmin.setPhone(user.getPhone());
-            newAdmin.setRole("Admin");
-
-            // Xóa user cũ và thêm user mới
-            userDAO.deleteUser(user.getId());
-            userDAO.addUser(newAdmin);
-
+            user.setRole("Admin");
             session.setAttribute("success", "🎉 Đã thăng cấp người dùng thành quản trị viên!");
-            response.sendRedirect(request.getContextPath() + "/users?action=list");
-            return;
-        }
-
-        // ❌ Nếu là Admin mà bị chọn hạ xuống Customer
-        if ("Admin".equalsIgnoreCase(user.getRole()) && "Customer".equalsIgnoreCase(newRole)) {
+        } else if ("Admin".equalsIgnoreCase(user.getRole()) && "Customer".equalsIgnoreCase(newRole)) {
             session.setAttribute("error", "⚠️ Không thể hạ cấp quản trị viên!");
             response.sendRedirect(request.getContextPath() + "/users?action=list");
             return;
         }
     }
 
-    // Nếu không thay đổi vai trò → cập nhật thông tin bình thường
     userDAO.updateUser(user);
-    session.setAttribute("success", "Cập nhật thông tin người dùng thành công!");
+    session.setAttribute("success", "✅ Cập nhật thông tin người dùng thành công!");
     response.sendRedirect(request.getContextPath() + "/users?action=list");
 }
 

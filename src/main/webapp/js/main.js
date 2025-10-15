@@ -1,18 +1,9 @@
-// ===============================
-// 📦 main.js — Xử lý giỏ hàng + Toast thông báo
-// ===============================
-
-/**
- * 🔔 Hiển thị thông báo nhanh (toast)
- * @param {string} message - Nội dung thông báo
- * @param {boolean} isSuccess - true nếu là thành công (xanh), false nếu là lỗi (đỏ)
- */
+/** 🔔 Hiển thị thông báo nhanh (toast) */
 function showToast(message, isSuccess = true) {
     const toast = document.createElement("div");
     toast.className = "toast-notification";
     toast.textContent = message;
 
-    // Style cơ bản
     toast.style.position = "fixed";
     toast.style.bottom = "20px";
     toast.style.right = "20px";
@@ -21,7 +12,7 @@ function showToast(message, isSuccess = true) {
     toast.style.fontSize = "15px";
     toast.style.fontWeight = "500";
     toast.style.color = "#fff";
-    toast.style.backgroundColor = isSuccess ? "#28a745" : "#dc3545"; // Xanh lá / Đỏ
+    toast.style.backgroundColor = isSuccess ? "#28a745" : "#dc3545";
     toast.style.boxShadow = "0 4px 10px rgba(0,0,0,0.25)";
     toast.style.opacity = "0";
     toast.style.transform = "translateY(20px)";
@@ -30,13 +21,11 @@ function showToast(message, isSuccess = true) {
 
     document.body.appendChild(toast);
 
-    // Hiệu ứng hiện lên
     setTimeout(() => {
         toast.style.opacity = "1";
         toast.style.transform = "translateY(0)";
     }, 100);
 
-    // Biến mất sau 3 giây
     setTimeout(() => {
         toast.style.opacity = "0";
         toast.style.transform = "translateY(20px)";
@@ -44,16 +33,13 @@ function showToast(message, isSuccess = true) {
     }, 3000);
 }
 
-/**
- * 🛒 Gửi AJAX thêm sản phẩm vào giỏ hàng
- * @param {number} productId - ID sản phẩm
- * @param {number} quantity - Số lượng sản phẩm
- */
+/** 🛒 Gửi AJAX thêm sản phẩm vào giỏ hàng */
 function handleAddToCart(productId, quantity) {
-    // ✅ Xác định contextPath chính xác
-    const pathParts = window.location.pathname.split("/");
-    const contextPath = pathParts.length > 1 && pathParts[1] ? "/" + pathParts[1] : "/";
-    console.log("📦 Gửi request đến:", contextPath + "/carts?action=addItem");
+    // ✅ Tự động nhận contextPath theo môi trường
+    const isLocal = window.location.hostname === "localhost";
+    const contextPath = isLocal ? "/doan" : "";
+
+    console.log("📦 Gửi request đến:", `${contextPath}/carts?action=addItem`);
 
     fetch(`${contextPath}/carts?action=addItem`, {
         method: "POST",
@@ -66,7 +52,7 @@ function handleAddToCart(productId, quantity) {
         }),
     })
         .then(async (response) => {
-            const text = await response.text(); // đọc text thô để debug nếu lỗi
+            const text = await response.text();
             console.log("🔍 Raw Response:", text);
             try {
                 return JSON.parse(text);
@@ -88,13 +74,10 @@ function handleAddToCart(productId, quantity) {
         });
 }
 
-// ===============================
-// 🎯 GẮN SỰ KIỆN CHO NÚT "THÊM VÀO GIỎ"
-// ===============================
+/** 🎯 Gắn sự kiện cho nút "Thêm vào giỏ" */
 document.addEventListener("DOMContentLoaded", () => {
     const buttons = document.querySelectorAll(".add-to-cart-btn");
 
-    // Tránh gắn trùng listener khi reload JS
     buttons.forEach((btn) => {
         btn.replaceWith(btn.cloneNode(true));
     });
@@ -108,4 +91,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
-

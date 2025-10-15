@@ -15,29 +15,29 @@ import java.io.IOException;
 public class GmailAuthorizeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // --- BẮT ĐẦU DEBUG ---
         System.out.println("DEBUG: Đã truy cập vào GmailAuthorizeServlet.");
 
         try {
             GoogleAuthorizationCodeFlow flow = GoogleAuthService.getFlow();
             System.out.println("DEBUG: Đã lấy được 'flow' thành công.");
 
-            String redirectUri = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-                    + request.getContextPath() + "/oauth2callback";
+            // ✅ Tạo redirectUri đúng theo môi trường
+            String redirectUri;
+            if ("localhost".equals(request.getServerName())) {
+                redirectUri = "http://localhost:8080/doan/oauth2callback";
+            } else {
+                redirectUri = "https://pjwebsale-388614816389.asia-southeast1.run.app/oauth2callback";
+            }
 
             System.out.println("DEBUG: Redirect URI được tạo là: " + redirectUri);
 
             GoogleAuthorizationCodeRequestUrl url = flow.newAuthorizationUrl().setRedirectUri(redirectUri);
-
-            System.out.println("DEBUG: Đang chuyển hướng đến URL của Google...");
             response.sendRedirect(url.build());
             System.out.println("DEBUG: Lệnh chuyển hướng đã được gửi.");
 
         } catch (Exception e) {
-            // NẾU CÓ LỖI, NÓ SẼ IN RA Ở ĐÂY
             System.err.println("### LỖI NGHIÊM TRỌNG TRONG GmailAuthorizeServlet ###");
             e.printStackTrace();
-            // Hiển thị lỗi ra cả trình duyệt để dễ thấy
             response.setContentType("text/plain; charset=UTF-8");
             response.getWriter().println("Gặp lỗi khi tạo URL xác thực. Vui lòng kiểm tra log của Tomcat.");
             e.printStackTrace(response.getWriter());

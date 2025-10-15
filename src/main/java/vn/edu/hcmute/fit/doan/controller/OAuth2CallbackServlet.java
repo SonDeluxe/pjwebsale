@@ -23,6 +23,7 @@ public class OAuth2CallbackServlet extends HttpServlet {
             if (request.getQueryString() != null) {
                 buf.append('?').append(request.getQueryString());
             }
+
             AuthorizationCodeResponseUrl responseUrl = new AuthorizationCodeResponseUrl(buf.toString());
             String code = responseUrl.getCode();
 
@@ -30,6 +31,7 @@ public class OAuth2CallbackServlet extends HttpServlet {
                 out.println("<h3>Lỗi khi xác thực: " + responseUrl.getError() + "</h3>");
                 return;
             }
+
             if (code == null) {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 out.println("<h3>Thiếu mã xác thực.</h3>");
@@ -37,10 +39,19 @@ public class OAuth2CallbackServlet extends HttpServlet {
             }
 
             GoogleAuthorizationCodeFlow flow = GoogleAuthService.getFlow();
-            String redirectUri = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-                    + request.getContextPath() + "/oauth2callback";
 
-            flow.createAndStoreCredential(flow.newTokenRequest(code).setRedirectUri(redirectUri).execute(), "user");
+            // ✅ Tạo redirectUri đúng theo môi trường
+            String redirectUri;
+            if ("localhost".equals(request.getServerName())) {
+                redirectUri = "http://localhost:8080/doan/oauth2callback";
+            } else {
+                redirectUri = "https://pjwebsale-388614816389.asia-southeast1.run.app/oauth2callback";
+            }
+
+            flow.createAndStoreCredential(
+                    flow.newTokenRequest(code).setRedirectUri(redirectUri).execute(),
+                    "user"
+            );
 
             out.println("<h1>Xác thực thành công!</h1>");
             out.println("<p>Ứng dụng đã được cấp quyền gửi email. Bạn có thể đóng tab này.</p>");

@@ -138,7 +138,7 @@ public class ProductDAO {
                 em.createQuery("SELECT COUNT(p) FROM Product p", Long.class).getSingleResult()
         );
     }
-
+    /*
     // Thêm vào ProductDAO.java
     public List<Product> findByCriteria(String keyword, Integer categoryId, Double maxPrice) {
         return executeWithEntityManager(em -> {
@@ -171,6 +171,7 @@ public class ProductDAO {
             return query.getResultList();
         });
     }
+     */
     /**
      * Phương thức tìm kiếm, lọc, sắp xếp và phân trang "All-in-One".
      * @param criteria Các tiêu chí lọc (search, categoryId, maxPrice)

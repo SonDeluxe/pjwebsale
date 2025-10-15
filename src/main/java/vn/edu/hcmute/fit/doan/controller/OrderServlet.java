@@ -9,7 +9,10 @@ import jakarta.servlet.http.HttpSession;
 import vn.edu.hcmute.fit.doan.*;
 import vn.edu.hcmute.fit.doan.database.*;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
+import java.time.LocalDate;
+
 
 @WebServlet("/orders")
 public class OrderServlet extends HttpServlet {
@@ -17,6 +20,7 @@ public class OrderServlet extends HttpServlet {
     private final CartDAO cartDAO = new CartDAO();
     private final LineItemDAO lineItemDAO = new LineItemDAO();
     private final ProductDAO productDAO = new ProductDAO();
+    private final WarrantyDAO warrantyDAO = new WarrantyDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -150,6 +154,25 @@ public class OrderServlet extends HttpServlet {
             }
             order.calculateTotal();
             orderDAO.addOrder(order);
+
+            for (LineItem orderedItem : order.getLineItems()) {
+                for (int i = 0; i < orderedItem.getQuantity(); i++) {
+                    Warranty warranty = new Warranty();
+                    warranty.setUser(customer); // customer lấy từ session
+                    warranty.setProduct(orderedItem.getProduct());
+
+                    LocalDate startDate = LocalDate.now();
+                    LocalDate endDate = startDate.plusMonths(12); // Mặc định 12 tháng
+
+                    warranty.setStartDate(Date.valueOf(startDate).toLocalDate());
+                    warranty.setEndDate(Date.valueOf(endDate).toLocalDate());
+                    warranty.setStatus("Còn hạn");
+                    warranty.setNotes("Bảo hành cho đơn hàng #" + order.getId());
+
+                    // GỌI PHƯƠNG THỨC MỚI CỦA BẠN
+                    warrantyDAO.add(warranty);
+                }
+            }
 
             // ==========================================================
             // SỬA LẠI: GỌI PHƯƠNG THỨC MỚI ĐỂ TRỪ TỒN KHO
