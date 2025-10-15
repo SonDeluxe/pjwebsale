@@ -51,10 +51,8 @@ function showToast(message, isSuccess = true) {
  */
 function handleAddToCart(productId, quantity) {
     // ✅ Xác định contextPath chính xác
-    const contextPath = window.location.pathname.split("/")[1]
-        ? "/" + window.location.pathname.split("/")[1]
-        : "";
-
+    const pathParts = window.location.pathname.split("/");
+    const contextPath = pathParts.length > 1 && pathParts[1] ? "/" + pathParts[1] : "/";
     console.log("📦 Gửi request đến:", contextPath + "/carts?action=addItem");
 
     fetch(`${contextPath}/carts?action=addItem`, {

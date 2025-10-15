@@ -160,37 +160,26 @@
     window.CONTEXT_PATH = '${pageContext.request.contextPath}';
 
     document.addEventListener('DOMContentLoaded', function() {
-        const dropdownLi = document.querySelector('.dropdown-news');
-        const toggle = document.querySelector('.dropdown-toggle');
-        const menu = document.querySelector('.dropdown-menu');
+        const li = document.querySelector('.dropdown-news');
+        const toggle = li?.querySelector('.dropdown-toggle');
+        const menu = li?.querySelector('.dropdown-menu');
+        if (!li || !toggle || !menu) return;
 
-        if (dropdownLi && menu) {
-            dropdownLi.addEventListener('mouseenter', function() {
-                menu.classList.add('active');
-            });
-            dropdownLi.addEventListener('mouseleave', function(e) {
-                if (!menu.contains(e.relatedTarget)) {
-                    menu.classList.remove('active');
-                }
-            });
+        const open  = () => menu.classList.add('active');
+        const close = () => menu.classList.remove('active');
 
-            toggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                menu.classList.toggle('active');
-            });
+        // Chỉ mở khi hover VÀO CHÍNH chữ "Tin tức"
+        toggle.addEventListener('mouseenter', open);
+        toggle.addEventListener('mouseleave', () => { if (!menu.matches(':hover')) close(); });
 
-            document.addEventListener('click', function(e) {
-                if (!dropdownLi.contains(e.target)) {
-                    menu.classList.remove('active');
-                }
-            });
+        // Giữ mở khi đang hover trong menu
+        menu.addEventListener('mouseenter', open);
+        menu.addEventListener('mouseleave', close);
 
-            menu.querySelectorAll('a').forEach(function(link) {
-                link.addEventListener('click', function(e) {
-                    menu.classList.remove('active');
-                });
-            });
-        }
+        // Click vào chữ để toggle (hữu ích cho mobile/desktop)
+        toggle.addEventListener('click', (e) => { e.preventDefault(); menu.classList.toggle('active'); });
+
+        // Click ra ngoài thì đóng
+        document.addEventListener('click', (e) => { if (!li.contains(e.target)) close(); });
     });
 </script>

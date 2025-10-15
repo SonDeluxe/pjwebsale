@@ -246,65 +246,115 @@ body {
     }
 }
 
-/* --- DROPDOWN TIN TỨC --- */
-.dropdown-news {
-    position: relative;
-    display: inline-block;
+/* ====== DROPDOWN TIN TỨC – BẢN TỐI GIẢN KHÔNG XUNG ĐỘT ====== */
+
+/* 0) Đừng để rule toàn cục .dropdown-menu ảnh hưởng dropdown Tin tức */
+.dropdown-menu { /* giữ cho nơi khác nếu cần */
+    /* KHÔNG đụng tới display ở đây; để nguyên mặc định */
 }
 
-.dropdown-toggle {
-    text-decoration: none;
-    color: inherit;
-    padding-right: 10px;
+/* 1) Chốt vùng kích hoạt: chỉ theo chữ .dropdown-toggle (không theo li:hover) */
+.nav-item.dropdown-news{ position: relative; display: inline-flex; }
+
+/* 2) Nút chữ "Tin tức" màu phù hợp header tối */
+.nav-item.dropdown-news > .dropdown-toggle{
+    display: inline-flex; align-items:center; gap:6px;
+    padding: 10px 14px;
+    color:#fff; text-decoration:none; font-weight:600;
+}
+.nav-item.dropdown-news > .dropdown-toggle:hover{ color:#e60012; }
+
+/* 3) Menu: luôn display:block (tránh tàng hình do display:none),
+      ẨN bằng opacity/visibility; KHÔNG có margin-top để không tạo "khoảng hở" */
+.nav-item.dropdown-news > .dropdown-menu{
+    display:block !important;
+    position:absolute; top:100%; left:0;
+    min-width:240px;
+    /* KHÔNG dùng margin-top: tránh khoảng hở khiến hover rơi */
+    padding:8px;
+    list-style:none;
+
+    background:#fff; color:#111;
+    border:1px solid #e5e7eb; border-radius:10px;
+    box-shadow:0 12px 32px rgba(0,0,0,.12);
+    z-index: 9500;
+
+    opacity:0; visibility:hidden; transform:translateY(6px);
+    pointer-events:none;
+    transition: opacity .18s ease, transform .18s ease, visibility .18s;
 }
 
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #333;
-    min-width: 250px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    z-index: 1001;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border: 1px solid #dee2e6;
-    border-radius: 5px; /* Sửa lỗi: thêm giá trị và dấu } */
-    overflow: hidden;
-    transition: opacity 0.2s ease;
-    opacity: 0;
+/* 4) CHỈ mở khi hover CHÍNH .dropdown-toggle, hoặc khi chuột đang ở trong menu,
+      hoặc khi JS thêm class .active (nếu bạn muốn click-to-toggle) */
+.nav-item.dropdown-news > .dropdown-toggle:hover + .dropdown-menu,
+.nav-item.dropdown-news > .dropdown-menu:hover,
+.nav-item.dropdown-news > .dropdown-menu.active{
+    opacity:1; visibility:visible; transform:translateY(0);
+    pointer-events:auto;
 }
 
-.dropdown-menu li {
-    border-bottom: 1px solid #444;
+/* 5) Item trong menu */
+.nav-item.dropdown-news > .dropdown-menu li{ border-radius:8px; }
+.nav-item.dropdown-news > .dropdown-menu a{
+    display:flex; justify-content:space-between; align-items:center; gap:10px;
+    padding:10px 12px; color:#111; text-decoration:none; border-radius:8px;
+    transition: background .15s ease, color .15s ease;
+}
+.nav-item.dropdown-news > .dropdown-menu a:hover{ background:#f3f4f6; }
+
+/* 6) Badge */
+.nav-item.dropdown-news .badge{
+    display:inline-block; min-width:20px; padding:2px 8px;
+    font-size:12px; font-weight:700; color:#fff; background:#e60012; border-radius:999px;
 }
 
-.dropdown-menu li:last-child {
-    border-bottom: none;
-}
+/* 7) Đảm bảo header nổi cao hơn hero/slider */
+.honda-header{ position:fixed; z-index: 9990; overflow:visible !important; }
+.hero, .hero-banner, .slider, .carousel{ position:relative; z-index:1; }
 
-.dropdown-menu a {
+/* ===== Align lại toàn bộ main nav cho thẳng hàng ===== */
+
+/* Các item trong thanh nav cùng baseline & chiều cao */
+.main-navigation ul{
     display: flex;
-    justify-content: space-between;
+    align-items: center;                /* căn giữa theo trục dọc */
+    gap: 28px;                          /* khoảng cách đều giữa các mục */
+}
+
+/* Mỗi li là một flex-item, nội dung căn giữa */
+.main-navigation li{
+    display: flex;
     align-items: center;
-    padding: 12px 18px;
+}
+
+/* Đưa .dropdown-news về display:flex cho đồng nhất */
+.nav-item.dropdown-news{
+    display: flex;                      /* thay cho inline-flex để không bị lệch */
+    position: relative;
+}
+
+/* Chuẩn hóa nút/link: cùng chiều cao, padding, border-radius */
+.main-navigation li > a,
+.nav-item.dropdown-news > .dropdown-toggle{
+    display: flex;
+    align-items: center;
+    height: 44px;                       /* cùng chiều cao */
+    padding: 0 16px;                    /* padding ngang đồng nhất */
+    border-radius: 10px;
+    line-height: 1;                     /* tránh đẩy baseline */
     text-decoration: none;
+    font-weight: 600;
     color: #fff;
-    transition: background-color 0.2s;
 }
 
-.dropdown-menu a:hover {
-    background-color: #e60012;
+/* Hiệu ứng hover đồng bộ */
+.main-navigation li > a:hover,
+.nav-item.dropdown-news > .dropdown-toggle:hover{
+    background: rgba(255,255,255,.15);
+    color: #fff;                        /* hoặc #e60012 nếu bạn thích đổi màu chữ */
 }
 
-.badge {
-    background-color: #e60012;
-    color: white;
-    padding: 2px 6px;
-    font-size: 0.75em;
-    border-radius: 3px;
-    font-weight: bold;
+/* Nếu muốn mục đang xem có style "active" */
+.main-navigation .is-active{
+    background: rgba(255,255,255,.2);
 }
-
