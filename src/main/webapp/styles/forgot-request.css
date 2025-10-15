@@ -1,0 +1,110 @@
+/* /styles/forgot-request.css */
+
+/* --- Cài đặt chung cho toàn trang --- */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f4f5f7; /* Màu nền xám rất nhạt */
+}
+
+/* --- Wrapper để căn giữa form --- */
+.login-page-wrapper {
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* --- Hộp chứa form --- */
+.login-box {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* --- Tiêu đề và mô tả --- */
+.login-box h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.login-box p {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 25px;
+    line-height: 1.5;
+    text-align: left; /* Căn lề trái cho đoạn mô tả */
+}
+
+/* --- Form và các thành phần --- */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* Hiệu ứng khi focus vào ô input */
+.input-group input:focus {
+    outline: none;
+    border-color: var(--color-primary, #cc0000); /* Màu đỏ của Honda */
+    box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.1);
+}
+
+/* --- Nút bấm --- */
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-primary, #cc0000); /* Màu đỏ của Honda */
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background-color: #a50000; /* Màu đỏ sậm hơn khi hover */
+}
+
+/* --- Thông báo lỗi --- */
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: left;
+    font-size: 0.9rem;
+}

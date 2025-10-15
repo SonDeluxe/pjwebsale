@@ -1,0 +1,202 @@
+/* ===== product-detail.light.css ===== */
+:root{
+    --bg:#ffffff;
+    --surface:#ffffff;
+    --surface-muted:#fafafa;
+    --text:#1f2937;              /* xám đậm */
+    --text-muted:#6b7280;        /* xám nhạt */
+    --brand:#e40000;             /* Honda red */
+    --border:#e5e7eb;            /* viền xám nhạt */
+    --shadow:0 8px 30px rgba(17,24,39,0.08);
+    --radius-lg:16px;
+    --radius:12px;
+}
+
+/* Nền trang trắng, bỏ dark */
+body{
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* Container chính */
+.product-detail-container{
+    max-width: 1200px;
+    margin: 32px auto 56px;
+    padding: 0 24px;
+}
+
+/* Breadcrumb – xám nhẹ, hover rõ */
+.breadcrumb{
+    display:flex; flex-wrap:wrap; gap:6px;
+    font-size:.95rem; color:var(--text-muted);
+    margin-bottom: 18px;
+}
+.breadcrumb a{
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color .2s, border-color .2s;
+}
+.breadcrumb a:hover{ color: var(--text); border-color: var(--text); }
+
+/* Layout 2 cột: Ảnh to 54%, thông tin 46% */
+.product-detail-layout{
+    display:grid;
+    grid-template-columns: 0.54fr 0.46fr;
+    gap:32px;
+    align-items: start;
+}
+
+/* Ảnh sản phẩm – khung sáng, bóng nhẹ */
+.product-image-section{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding:16px;
+    box-shadow: var(--shadow);
+}
+.product-image{
+    width:100%; height: 520px;
+    object-fit: cover;
+    border-radius: 12px;
+    display:block;
+}
+
+/* Cột thông tin */
+.product-info-section{ padding: 8px 0; }
+
+.product-info-section .category{
+    display:inline-block;
+    font-weight:600;
+    font-size:.9rem;
+    color: var(--brand);
+    background: #fff5f5;
+    border:1px solid #ffe3e3;
+    padding:6px 12px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+}
+
+.product-name{
+    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+    line-height:1.22;
+    margin: 6px 0 10px;
+    color: #111827;
+}
+
+.price{
+    font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+    font-weight: 800;
+    color: var(--brand);
+    margin-bottom: 14px;
+}
+
+.description{
+    color: var(--text);
+    line-height:1.7;
+    background: var(--surface-muted);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding:12px 14px;
+    margin-bottom: 18px;
+}
+
+/* Form thêm giỏ hàng – thẻ sáng, bo lớn */
+.add-to-cart-form{
+    display:flex; align-items:center; flex-wrap:wrap; gap:12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding:14px;
+    box-shadow: var(--shadow);
+}
+
+.quantity-input-wrapper{ display:flex; align-items:center; gap:10px; color:#374151; }
+.quantity-input{
+    width: 90px; padding:10px 12px;
+    border:1px solid var(--border);
+    background:#fff; color:#111827; border-radius:10px; outline:none;
+}
+.quantity-input:focus{ border-color:#c7cad1; box-shadow: 0 0 0 3px rgba(17,24,39,0.05); }
+
+/* Nút */
+.btn{
+    appearance:none; border:none; cursor:pointer;
+    font-weight:700; padding:12px 16px; border-radius:12px;
+    transition: transform .12s ease, filter .12s ease, box-shadow .15s ease;
+    text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+}
+.btn:active{ transform: translateY(1px) scale(.99); }
+
+.btn.btn-add{
+    background: var(--brand);
+    color:#fff;
+    box-shadow: 0 6px 18px rgba(228,0,0,.25);
+}
+.btn.btn-add:hover{ filter:brightness(1.05); }
+
+.btn.btn-view-cart{
+    background:#ffffff;
+    color:#111827;
+    border:1px solid var(--border);
+}
+.btn.btn-view-cart:hover{ background:#f9fafb; }
+
+/* Đánh giá – thẻ sáng, chữ đậm hơn */
+.product-reviews-section{ margin-top: 36px; }
+.product-reviews-section h2{
+    font-size:1.25rem; margin-bottom: 14px; color:#111827;
+}
+.review-item{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius: 12px;
+    padding:14px;
+    margin-bottom:12px;
+    box-shadow: var(--shadow);
+}
+.review-header{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:6px; }
+.review-header strong{ color:#111827; }
+.rating{ color:#b45309; font-weight:700; } /* vàng nâu để dễ đọc trên nền trắng */
+.review-comment{ color:#1f2937; margin:4px 0 8px; }
+.review-date{ color:var(--text-muted); font-size:.9rem; }
+
+/* Form viết đánh giá – sáng, viền rõ */
+.review-form-section{
+    margin-top: 28px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius: 16px;
+    padding:18px;
+    box-shadow: var(--shadow);
+}
+.review-form-section h3{ margin-top:0; color:#111827; }
+
+.form-group{ display:flex; flex-direction:column; gap:8px; margin-bottom:14px; }
+.form-group select,
+.form-group textarea{
+    background:#fff; color:#111827;
+    border:1px solid var(--border);
+    border-radius:10px; padding:10px 12px; outline:none;
+}
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:#c7cad1; box-shadow: 0 0 0 3px rgba(17,24,39,0.05);
+}
+
+.btn.btn-review{ background:#16a34a; color:#fff; }
+.btn.btn-review:hover{ filter:brightness(1.05); }
+
+/* Responsive */
+@media (max-width: 1100px){
+    .product-detail-layout{ grid-template-columns: 1fr; }
+    .product-image{ height: 460px; }
+}
+@media (max-width: 560px){
+    .product-detail-container{ margin-top: 24px; padding: 0 16px; }
+    .product-image{ height: 360px; }
+    .add-to-cart-form{ padding:12px; }
+}
+
+/* Giảm chuyển động nếu người dùng yêu cầu */
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }

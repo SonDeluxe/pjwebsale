@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/includes/header.jsp" value="file://$PROJECT_DIR$/src/main/webapp/includes" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/product.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/products/list.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/products" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/users/profile.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/users" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/views/wishlist/view.jsp" value="file://$PROJECT_DIR$/src/main/webapp/views/wishlist" />
+      </map>
+    </option>
+  </component>
+</project>

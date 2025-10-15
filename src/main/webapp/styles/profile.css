@@ -1,0 +1,40 @@
+.profile-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.profile-header {
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.profile-header h2 {
+    color: #333;
+}
+
+.profile-details li {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.profile-details li:last-child {
+    border-bottom: none;
+}
+
+.profile-details strong {
+    color: #555;
+}
+
+.profile-details span {
+    color: #e60012;
+    font-weight: 500;
+}

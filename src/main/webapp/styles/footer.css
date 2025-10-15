@@ -1,0 +1,62 @@
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.footer-content .icon img {
+    width: 35px;
+    height: auto;
+    margin: 0 8px;
+    border-radius: 5px;
+}
+
+.footer-content {
+    background-color: #222;
+    color: #f4f4f4;
+    padding: 30px 0;
+    text-align: center;
+}
+/* Nhóm icon */
+.footer-content .icon {
+    display: flex;
+    align-items: center;   /* canh giữa theo trục dọc */
+    justify-content: center;
+    gap: 14px;
+    line-height: 0;        /* loại bỏ khoảng trống inline */
+}
+
+/* Mỗi icon là 1 khung vuông */
+.footer-content .icon a {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;         /* thích tròn thì 50% */
+    background: transparent;     /* hoặc rgba(255,255,255,.06) nếu muốn có nền */
+}
+
+/* Ảnh bên trong khung – ép kích thước đồng nhất */
+.footer-content .icon img {
+    width: 26px;                 /* cùng kích thước cho FB/IG/YT */
+    height: 26px;
+    object-fit: contain;         /* giữ tỉ lệ chuẩn */
+    display: block;              /* bỏ baseline gap */
+    margin: 0;
+    border-radius: 6px;
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.0"
+             xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+
+    <persistence-unit name="doan-unit" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>vn.edu.hcmute.fit.doan.User</class>
+        <class>vn.edu.hcmute.fit.doan.Product</class>
+        <class>vn.edu.hcmute.fit.doan.Category</class>
+        <class>vn.edu.hcmute.fit.doan.Cart</class>
+        <class>vn.edu.hcmute.fit.doan.LineItem</class>
+        <class>vn.edu.hcmute.fit.doan.Order</class>
+        <class>vn.edu.hcmute.fit.doan.Wishlist</class>
+        <class>vn.edu.hcmute.fit.doan.Shipment</class>
+        <class>vn.edu.hcmute.fit.doan.Review</class>
+        <class>vn.edu.hcmute.fit.doan.Payment</class>
+        <class>vn.edu.hcmute.fit.doan.Notification</class>
+        <class>vn.edu.hcmute.fit.doan.Warranty</class>
+        <class>vn.edu.hcmute.fit.doan.SparePart</class>
+
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+
+            <property name="jakarta.persistence.jdbc.url"
+                      value="jdbc:mysql://mysql-2848b02a-student-webpj.d.aivencloud.com:11160/doan?serverTimezone=UTC&amp;sslMode=REQUIRED"/>
+            <property name="jakarta.persistence.jdbc.user" value="avnadmin"/>
+            <property name="jakarta.persistence.jdbc.password" value="AVNS_-joNOGo9blaAVuHdDZW"/>
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>

@@ -1,0 +1,310 @@
+/* src/main/webapp/styles/header.css */
+
+/* --- CÀI ĐẶT CHUNG CHO HEADER --- */
+.honda-header {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: rgba(0, 0, 0, 0.6); /* Màu nền mặc định */
+    color: #fff;
+    padding: 15px 50px;
+    position: fixed; /* Header luôn ở trên cùng */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    transition: background-color 0.3s ease;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Dàn các mục ra xa nhau */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    width: 100%;
+}
+
+/* --- LOGO --- */
+.logo-section .honda-logo {
+    height: 45px; /* Tăng kích thước logo */
+    object-fit: contain;
+}
+
+/* --- THANH ĐIỀU HƯỚNG CHÍNH --- */
+.main-navigation ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Dàn các mục menu theo hàng ngang */
+    gap: 25px; /* Khoảng cách giữa các mục */
+}
+
+.main-navigation a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.main-navigation a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* --- KHU VỰC TÀI KHOẢN --- */
+.account-section {
+    position: relative;
+}
+
+.account-dropdown {
+    position: relative; /* 🟢 Thêm dòng này để dropdown căn theo nút tài khoản */
+    display: inline-block;
+}
+
+.account-btn {
+    cursor: pointer;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* Menu con của tài khoản */
+.account-dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;      /* 🟢 Hiển thị ngay dưới nút */
+    right: 0;       /* 🟢 Căn phải so với nút */
+    background-color: #333;
+    min-width: 180px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 9999;  /* 🟢 Luôn nổi trên video hoặc nội dung khác */
+}
+
+/* Hiện khi hover */
+.account-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Style từng mục trong menu */
+.dropdown-content a {
+    color: #fff;
+    padding: 12px 18px;
+    display: block;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #e60012; /* Đỏ Honda */
+}
+
+/* --- HỘP GỌI Ý TÌM KIẾM --- */
+.search-section {
+    position: relative; /* Đặt base cho hộp gợi ý tuyệt đối */
+    flex-grow: 1;
+    max-width: 400px;
+}
+
+.search-suggestions {
+    display: none; /* Mặc định ẩn, JS sẽ hiện */
+    position: absolute;
+    top: 100%; /* Đặt ngay dưới thanh input */
+    left: 0;
+    right: 0;
+    z-index: 1001; /* Đảm bảo nằm trên các nội dung khác */
+    background-color: #333; /* Nền tối giống header */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.search-suggestion-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    color: #f4f4f4;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    transition: background-color 0.2s;
+}
+
+.search-suggestion-item:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.suggestion-name {
+    font-weight: bold;
+}
+
+.suggestion-price {
+    font-size: 0.85em;
+    color: #aaa;
+}
+
+body {
+    padding-top: 110px; /* thử tăng lên để đủ che header */
+    background-color: #fff; /* tùy chọn */
+}
+
+/* ===============================
+   HONDA PRO DROPDOWN - CLEAN & MODERN
+   =============================== */
+.account-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.account-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Nút Tài khoản */
+.account-btn {
+    cursor: pointer;
+    font-weight: 600;
+    color: #fff;
+    user-select: none;
+    letter-spacing: 0.3px;
+    transition: color 0.25s ease;
+}
+
+.account-btn:hover {
+    color: #e60012;
+}
+
+/* Hộp menu */
+.dropdown-content {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: -8px;
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    min-width: 200px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    z-index: 9999;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+}
+
+/* Hiện menu khi hover */
+.account-dropdown:hover .dropdown-content,
+.dropdown-content:hover {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Item trong menu */
+.dropdown-content a {
+    display: block;
+    text-align: center;
+    color: #f5f5f5;
+    padding: 12px 18px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.2px;
+    transition: all 0.25s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: transparent;
+}
+
+/* Item cuối cùng bỏ border */
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+/* Hover item */
+.dropdown-content a:hover {
+    background: linear-gradient(135deg, #e60012 0%, #b0000e 100%);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* Hiệu ứng fade */
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- DROPDOWN TIN TỨC --- */
+.dropdown-news {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    text-decoration: none;
+    color: inherit;
+    padding-right: 10px;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #333;
+    min-width: 250px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #dee2e6;
+    border-radius: 5px; /* Sửa lỗi: thêm giá trị và dấu } */
+    overflow: hidden;
+    transition: opacity 0.2s ease;
+    opacity: 0;
+}
+
+.dropdown-menu li {
+    border-bottom: 1px solid #444;
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.2s;
+}
+
+.dropdown-menu a:hover {
+    background-color: #e60012;
+}
+
+.badge {
+    background-color: #e60012;
+    color: white;
+    padding: 2px 6px;
+    font-size: 0.75em;
+    border-radius: 3px;
+    font-weight: bold;
+}
+

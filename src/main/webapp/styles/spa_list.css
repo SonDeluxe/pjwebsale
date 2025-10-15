@@ -1,0 +1,140 @@
+/* /styles/spa_list.css */
+
+/* --- Cấu trúc chung cho nội dung chính --- */
+.main-content {
+    padding-top: 40px;    /* Khoảng cách với header */
+    padding-bottom: 60px; /* Khoảng cách với footer */
+    background-color: #f8f9fa; /* Màu nền xám rất nhạt cho toàn bộ khu vực nội dung */
+    min-height: calc(100vh - 150px); /* Đảm bảo nội dung đủ cao để đẩy footer xuống (điều chỉnh 150px = chiều cao header + footer) */
+}
+
+/* --- Container để căn giữa và giới hạn chiều rộng --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto; /* Căn giữa container */
+    padding: 0 15px; /* Tạo khoảng đệm hai bên */
+    background-color: #ffffff; /* Nền trắng cho khu vực nội dung chính */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Đổ bóng nhẹ nhàng */
+}
+
+/* --- Tiêu đề trang --- */
+.page-title {
+    font-size: 2.2rem; /* Cỡ chữ lớn cho tiêu đề */
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--color-primary, #cc0000); /* Đường gạch chân màu đỏ của Honda */
+    padding-bottom: 10px;
+    text-align: left;
+}
+
+/* --- Bảng hiển thị danh sách --- */
+.table {
+    width: 100%;
+    border-collapse: collapse; /* Gộp các đường viền của bảng */
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+/* --- Tiêu đề của bảng (thead) --- */
+.table thead {
+    background-color: #343a40; /* Màu nền tối cho header của bảng */
+    color: #ffffff; /* Chữ màu trắng */
+}
+
+.table th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase; /* Viết hoa các tiêu đề cột */
+    letter-spacing: 0.5px;
+}
+
+/* --- Các ô dữ liệu trong bảng (td) --- */
+.table td {
+    padding: 15px;
+    border-bottom: 1px solid #dee2e6; /* Đường kẻ ngang mờ giữa các hàng */
+    vertical-align: middle; /* Căn giữa nội dung theo chiều dọc */
+}
+
+/* --- Hiệu ứng cho các hàng trong bảng --- */
+/* Tạo hiệu ứng sọc vằn (mỗi hàng chẵn có màu nền khác) */
+.table-striped tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Tạo hiệu ứng khi di chuột qua hàng */
+.table-hover tbody tr:hover {
+    background-color: #f1f1f1; /* Đổi màu nền khi di chuột qua */
+}
+
+/* --- Hình ảnh sản phẩm trong bảng --- */
+.table img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover; /* Đảm bảo ảnh không bị méo */
+    border-radius: 8px; /* Bo góc ảnh mềm mại hơn */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Các nút bấm (Buttons) --- */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border-color: #dc3545;
+}
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Kích thước nút nhỏ hơn cho các hành động Sửa/Xóa */
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 13px;
+}
+
+/* Đảm bảo form chứa nút Xóa không làm vỡ layout */
+.table td form {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+
+/* --- Thông báo (Alerts) --- */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
