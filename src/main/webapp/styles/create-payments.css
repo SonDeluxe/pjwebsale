@@ -1,0 +1,179 @@
+/* ===== payment.css ===== */
+:root{
+    --brand:#e60012;             /* Honda red */
+    --brand-dark:#c8000f;
+    --text:#111827;
+    --text-muted:#6b7280;
+    --border:#e5e7eb;
+    --surface:#ffffff;
+    --surface-muted:#f9fafb;
+    --shadow:0 12px 30px rgba(17,24,39,.08);
+    --radius:16px;
+}
+
+/* Nền và chữ chung */
+html,body{ background:#ffffff; color:var(--text); }
+
+/* Tiêu đề + tổng tiền */
+h2{
+    font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+    line-height:1.25;
+    margin: 8px 0 6px;
+}
+h2::first-letter{ letter-spacing:.2px; }
+p strong{ color:#111827; }
+
+/* Card form: bám đúng form /payments để không ảnh hưởng trang khác */
+form[action$="/payments"]{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin: 14px 0 16px;
+    box-shadow: var(--shadow);
+    max-width: 640px;
+}
+
+/* Nhãn + hàng chọn */
+form[action$="/payments"] label{
+    font-weight: 600;
+    color:#1f2937;
+    margin-bottom: 6px;
+    display:inline-block;
+}
+
+/* Select đẹp, lớn vừa tay */
+form[action$="/payments"] select{
+    appearance:none;
+    width: 100%;
+    max-width: 460px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface-muted);
+    color: var(--text);
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+form[action$="/payments"] select:focus{
+    border-color:#c7cad1;
+    box-shadow: 0 0 0 3px rgba(17,24,39,.06);
+    background:#fff;
+}
+
+/* Nút xác nhận: đậm, pill */
+form[action$="/payments"] input[type="submit"]{
+    appearance:none;
+    border:none;
+    cursor:pointer;
+    background: var(--brand);
+    color:#fff;
+    font-weight: 800;
+    letter-spacing:.2px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    margin-top: 10px;
+    transition: background .15s ease, transform .1s ease, box-shadow .15s ease;
+    box-shadow: 0 8px 18px rgba(230,0,18,.22);
+}
+form[action$="/payments"] input[type="submit"]:hover{
+    background: var(--brand-dark);
+}
+form[action$="/payments"] input[type="submit"]:active{
+    transform: translateY(1px);
+}
+
+/* Link quay lại -> nút viền nhẹ */
+form[action$="/payments"] ~ a{
+    display: inline-block;
+    margin-top: 6px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--text);
+    background:#fff;
+    transition: background .15s ease, border-color .15s ease;
+}
+form[action$="/payments"] ~ a:hover{
+    background: var(--surface-muted);
+    border-color:#d1d5db;
+}
+
+/* Tối ưu khoảng cách đoạn <p> chứa tổ*
+
+
+ */
+/* Căn khối nội dung thanh toán ra giữa trang (horizontal center) */
+body > div[style*="padding: 20px"]{
+    max-width: 860px;         /* bề rộng dễ đọc trên desktop */
+    margin: 28px auto 80px;   /* auto -> căn giữa ngang */
+    padding: 20px;            /* giữ padding cũ */
+}
+
+/* Form vẫn full bề rộng khối, không bị nhỏ hẹp */
+form[action$="/payments"]{
+    width: 100%;
+}
+
+/* Link quay lại nằm cùng trục, không bị lệch */
+form[action$="/payments"] ~ a{
+    margin-left: 0;
+}
+
+/* ===== Căn GIỮA toàn bộ khu vực thanh toán ===== */
+/* Bắt đúng <div style="padding: 20px"> bạn đang dùng */
+body > div[style*="padding: 20px"]{
+    /* khung đọc dễ */
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;                 /* giữa theo NGANG */
+    padding: 20px;                  /* giữ padding cũ */
+
+    /* giữa theo DỌC (desktop) */
+    min-height: calc(100vh - 140px); /* 140px ≈ header + khoảng thở */
+    display: grid;
+    align-content: center;          /* giữa dọc nội dung */
+    justify-items: center;          /* giữa ngang các phần tử con */
+
+    text-align: center;             /* tiêu đề/tổng tiền ở giữa */
+}
+
+/* Form vẫn căn trái cho dễ điền, nhưng nằm giữa khối */
+form[action$="/payments"]{
+    width: 100%;
+    max-width: 720px;
+    margin: 8px auto 16px;          /* giữa theo NGANG */
+    text-align: left;               /* nội dung form căn trái */
+}
+
+/* Select giữa trong form, không quá rộng */
+form[action$="/payments"] select{
+    max-width: 520px;
+    margin: 6px auto 0;
+    display: block;
+}
+
+/* Nút xác nhận: giữa */
+form[action$="/payments"] input[type="submit"]{
+    display: inline-flex;
+    margin: 12px auto 0;
+}
+
+/* Link quay lại: đặt giữa luôn */
+form[action$="/payments"] ~ a{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto 0;
+}
+
+/* Mobile: bỏ giữa dọc để tránh đẩy quá cao/thấp, vẫn giữa ngang */
+@media (max-width: 768px){
+    body > div[style*="padding: 20px"]{
+        min-height: auto;
+        align-content: start;
+        padding-top: 24px;
+    }
+}

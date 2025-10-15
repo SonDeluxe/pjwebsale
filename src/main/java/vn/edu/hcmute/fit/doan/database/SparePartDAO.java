@@ -60,6 +60,13 @@ public class SparePartDAO {
                         .getResultList()
         );
     }
+    public List<SparePart> findByName(String keyword) {
+        return executeWithEntityManager(em ->
+                em.createQuery("SELECT s FROM SparePart s LEFT JOIN FETCH s.category WHERE s.name LIKE :keyword", SparePart.class)
+                        .setParameter("keyword", "%" + keyword + "%")
+                        .getResultList()
+        );
+    }
 
     public SparePart findById(int id) {
         return executeWithEntityManager(em -> em.find(SparePart.class, id));

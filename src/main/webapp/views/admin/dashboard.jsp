@@ -43,7 +43,6 @@
 
         <%-- CÁC LINK ĐÃ ĐƯỢC CẬP NHẬT --%>
         <a href="${pageContext.request.contextPath}/spareparts?action=list">Quản lý Phụ tùng</a>
-        <a href="${pageContext.request.contextPath}/sparepart-categories?action=list">Quản lý Danh mục Phụ tùng</a>
         <a href="${pageContext.request.contextPath}/warranties?action=adminList">Quản lý Bảo hành</a>
     </div>
 </div>

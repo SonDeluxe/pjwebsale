@@ -70,7 +70,7 @@
 
 <%-- Script hiệu ứng gõ chữ --%>
 <script>
-    const text = "Chào mừng bạn đến với Honda - nơi sức mạnh của những giấc mơ dẫn lối. Chúng tôi tự hào mang đến những sản phẩm chất lượng và trải nghiệm vượt trội.";
+    const text = "Chào mừng bạn đến với Honda - nơi sức mạnh của những giấc mơ dẫn lối.";
     let i = 0;
     function typeWriter() {
         if (i < text.length) {

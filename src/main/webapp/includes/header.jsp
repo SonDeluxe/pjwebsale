@@ -118,8 +118,6 @@
                     <li><a href="${pageContext.request.contextPath}/orders?action=list">Đơn hàng</a></li>
                     <li><a href="${pageContext.request.contextPath}/warranties">Bảo hành</a></li>
                     <li><a href="${pageContext.request.contextPath}/carts?action=view">Giỏ hàng</a></li>
-                    <!-- Thêm mục Wishlist -->
-                    <li><a href="${pageContext.request.contextPath}/wishlist/">Wishlist</a></li>
                 </c:if>
                 <li class="nav-item dropdown-news">
                     <a href="#" class="dropdown-toggle">Tin tức ▼</a>

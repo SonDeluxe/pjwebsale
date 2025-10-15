@@ -88,9 +88,22 @@ public class SparePartServlet extends HttpServlet {
     }
 
     // ========== CÁC PHƯƠNG THỨC CHO USER ==========
+
     private void listSparePartsForUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<SparePart> spareParts = sparePartDAO.getAll();
+        String searchKeyword = request.getParameter("search");
+        List<SparePart> spareParts;
+
+        if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
+            // Nếu có từ khóa, thực hiện tìm kiếm
+            spareParts = sparePartDAO.findByName(searchKeyword);
+        } else {
+            // Nếu không, lấy tất cả
+            spareParts = sparePartDAO.getAll();
+        }
+
         request.setAttribute("spareParts", spareParts);
+        request.setAttribute("searchKeyword", searchKeyword); // Gửi lại từ khóa để hiển thị trên ô tìm kiếm
+
         request.setAttribute("pageTitle", "Danh sách Phụ tùng");
         request.setAttribute("bodyContent", "/views/spareparts/list.jsp");
         request.setAttribute("customCss", "list.css");

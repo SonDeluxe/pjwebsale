@@ -5,12 +5,22 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import vn.edu.hcmute.fit.doan.*;
-import vn.edu.hcmute.fit.doan.database.*;
+import vn.edu.hcmute.fit.doan.Category;
+import vn.edu.hcmute.fit.doan.Product;
+import vn.edu.hcmute.fit.doan.Review;
+import vn.edu.hcmute.fit.doan.database.CategoryDAO;
+import vn.edu.hcmute.fit.doan.database.ProductDAO;
+import vn.edu.hcmute.fit.doan.database.ReviewDAO;
 
-import java.io.*;
-import java.nio.file.*;
-import java.util.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @MultipartConfig(
         maxFileSize = 1024 * 1024 * 5,      // 5MB

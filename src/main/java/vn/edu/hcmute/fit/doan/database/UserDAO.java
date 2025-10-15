@@ -91,11 +91,17 @@ public class UserDAO {
                 managed.setEmail(user.getEmail());
                 managed.setAddress(user.getAddress());
                 managed.setPhone(user.getPhone());
-                managed.setPassword(user.getPassword());
+
+                if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+                    managed.setPassword(user.getPassword());
+                }
+
+                em.flush(); // ✅ bắt Hibernate ghi xuống DB ngay lập tức
             }
         });
         System.out.println("✅ Đã cập nhật người dùng ID: " + user.getId());
     }
+
 
 
     public long countAll() {
