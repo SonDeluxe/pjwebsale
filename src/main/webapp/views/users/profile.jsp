@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Thông tin tài khoản</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/base.css">
 </head>
 <body>
 <jsp:include page="/includes/header.jsp" />
